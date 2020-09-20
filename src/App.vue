@@ -13,6 +13,10 @@
 import Player from "./components/Player";
 import WinnerMessage from "./components/WinnerMessage";
 import { randomNumBetween } from "./helperFunctions.js";
+import Vue from "vue";
+import VueConfetti from "vue-confetti";
+
+Vue.use(VueConfetti);
 
 export default {
   name: "App",
@@ -21,6 +25,9 @@ export default {
     players: null,
     arePlaying: false,
     winner: null,
+    audios: {
+      laugh: require("./assets/audios/Laugh.mp3"),
+    },
   }),
   components: {
     Player,
@@ -77,13 +84,25 @@ export default {
       }, 1000);
     },
     setWinner() {
+      this.playLaugh();
       if (this.players[0].HP > 0 && this.players[1].HP > 0) {
         this.winner = "TIE";
       } else if (this.players[0].HP > 0) {
         this.winner = this.players[1].name;
+        this.startConfetti();
       } else {
         this.winner = this.players[0].name;
+        this.startConfetti();
       }
+    },
+    startConfetti() {
+      this.$confetti.start({
+        particlesPerFrame: 0.75,
+      });
+    },
+    playLaugh() {
+      const laughAudio = new Audio(this.audios.laugh);
+      laughAudio.play();
     },
   },
 };

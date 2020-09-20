@@ -1,10 +1,5 @@
 <template>
   <div class="message">
-    <!-- {{
-    winner === "TIE"
-    ? "TIE"
-    : `The winner is: ${winner}`
-    }}-->
     <p v-if="winner === 'TIE'" class="winner">TIE</p>
     <div v-else>
       <p>The winner is</p>
