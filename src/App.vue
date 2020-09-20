@@ -31,13 +31,28 @@ export default {
     randomNumBetween,
     async setUp() {
       await this.getUsers();
-      this.players = [this.pickPlayer(), this.pickPlayer()];
-      console.log(this.players);
+      const imageP1 = await this.getImage();
+      const imageP2 = await this.getImage();
+      this.players = [
+        {
+          ...this.pickPlayer(),
+          image: imageP1,
+        },
+        {
+          ...this.pickPlayer(),
+          image: imageP2,
+        },
+      ];
     },
     getUsers() {
       return fetch("https://jsonplaceholder.typicode.com/users")
         .then((response) => response.json())
         .then((json) => (this.users = json));
+    },
+    getImage() {
+      return fetch("https://api.thecatapi.com/v1/images/search")
+        .then((response) => response.json())
+        .then((json) => json[0].url);
     },
     pickPlayer() {
       const randomIndex = this.randomNumBetween(0, this.users.length - 1);

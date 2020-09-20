@@ -1,6 +1,7 @@
 <template>
   <div class="player">
     <input v-model="user.name" class="name" />
+    <img :src="user.image" />
     <div class="container-points">
       <p>HP:</p>
       <input v-model="user.HP" class="points" />
