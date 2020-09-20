@@ -1,12 +1,15 @@
 <template>
   <div id="app">
     <Player v-if="players" :user="players[0]" />
+    <button v-if="!arePlaying" @click="startCompetition" class="btn-compete">Compete!</button>
+    <WinnerMessage v-if="winner" :winner="winner"></WinnerMessage>
     <Player v-if="players" :user="players[1]" />
   </div>
 </template>
 
 <script>
 import Player from "./components/Player";
+import WinnerMessage from "./components/WinnerMessage";
 import { randomNumBetween } from "./helperFunctions.js";
 
 export default {
@@ -14,9 +17,12 @@ export default {
   data: () => ({
     users: null,
     players: null,
+    arePlaying: false,
+    winner: null,
   }),
   components: {
     Player,
+    WinnerMessage,
   },
   created() {
     this.setUp();
@@ -40,6 +46,27 @@ export default {
         HP: this.randomNumBetween(-200, -40),
         DPS: this.randomNumBetween(5, 25),
       };
+    },
+    startCompetition() {
+      this.arePlaying = true;
+      const playing = setInterval(() => {
+        this.players[0].HP += this.players[1].DPS;
+        this.players[1].HP += this.players[0].DPS;
+        if (this.players[0].HP > 0 || this.players[1].HP > 0) {
+          this.arePlaying = false;
+          clearInterval(playing);
+          this.setWinner();
+        }
+      }, 1000);
+    },
+    setWinner() {
+      if (this.players[0].HP > 0 && this.players[1].HP > 0) {
+        this.winner = "TIE";
+      } else if (this.players[0].HP > 0) {
+        this.winner = this.players[1].name;
+      } else {
+        this.winner = this.players[0].name;
+      }
     },
   },
 };
