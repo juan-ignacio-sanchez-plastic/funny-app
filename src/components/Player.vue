@@ -19,5 +19,35 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+input {
+  outline: none;
+  border: 0px;
+  border-radius: 20px;
+  text-align: center;
+}
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 50px;
+  height: 60vh;
+  .name {
+    font-size: 2rem;
+  }
+  img {
+    max-width: 50%;
+    max-height: 150px;
+    border-radius: 400px;
+  }
+  .container-points {
+    display: flex;
+    font-size: 1.5rem;
+    input {
+      width: 80px;
+      font-weight: 900;
+    }
+  }
+}
 </style>

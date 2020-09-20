@@ -87,13 +87,27 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "~normalize.css";
 #app {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+.btn-compete {
+  font-size: 2rem;
+  padding: 15px;
+  border: 0px;
+  border-radius: 50px;
+  -webkit-box-shadow: 10px 10px 5px -5px rgba(135, 128, 135, 1);
+  -moz-box-shadow: 10px 10px 5px -5px rgba(135, 128, 135, 1);
+  box-shadow: 10px 10px 5px -5px rgba(135, 128, 135, 1);
+  transition: transform 0.2s;
+  &:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
 }
 </style>
