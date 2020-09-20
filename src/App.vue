@@ -1,8 +1,12 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <Player v-if="players" :user="players[0]" />
+    <Player v-if="players" :user="players[1]" />
+  </div>
 </template>
 
 <script>
+import Player from "./components/Player";
 import { randomNumBetween } from "./helperFunctions.js";
 
 export default {
@@ -11,7 +15,9 @@ export default {
     users: null,
     players: null,
   }),
-  components: {},
+  components: {
+    Player,
+  },
   created() {
     this.setUp();
   },
