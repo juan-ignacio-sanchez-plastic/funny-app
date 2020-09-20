@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <Player v-if="players" :user="players[0]" />
-    <button v-if="!arePlaying" @click="startCompetition" class="btn-compete">Compete!</button>
-    <WinnerMessage v-if="winner" :winner="winner"></WinnerMessage>
+    <div class="middle-container">
+      <WinnerMessage v-if="winner" :winner="winner"></WinnerMessage>
+      <button v-if="!arePlaying" @click="startCompetition" class="btn-compete">Compete!</button>
+    </div>
     <Player v-if="players" :user="players[1]" />
   </div>
 </template>
@@ -89,12 +91,16 @@ export default {
 
 <style lang="scss">
 @import "~normalize.css";
+@import "./scss/_variables.scss";
 #app {
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 100vh;
+  background-image: url("./assets/bg1.jpg");
+  background-size: cover;
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  color: $font-color;
 }
 .btn-compete {
   font-size: 2rem;
@@ -109,5 +115,10 @@ export default {
     transform: scale(1.2);
     cursor: pointer;
   }
+}
+.middle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

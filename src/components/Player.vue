@@ -20,17 +20,21 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../scss/_variables.scss";
 input {
   outline: none;
   border: 0px;
   border-radius: 20px;
   text-align: center;
+  color: $font-color;
+  background-color: rgba(0, 0, 0, 0);
 }
 .player {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50px;
   height: 60vh;
   .name {
@@ -47,6 +51,7 @@ input {
     input {
       width: 80px;
       font-weight: 900;
+      background-color: rgba(0, 0, 0, 0);
     }
   }
 }
