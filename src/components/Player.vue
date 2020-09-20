@@ -10,12 +10,13 @@
       <p>DPS:</p>
       <input v-model="user.DPS" class="points" />
     </div>
+    <button @click="pickAndSetPlayer" class="btn">Randomize</button>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["user"],
+  props: ["user", "pickAndSetPlayer"],
 };
 </script>
 
@@ -34,6 +35,7 @@ input {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  padding: 15px 0;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50px;
   height: 60vh;

@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <Player v-if="players" :user="players[0]" />
+    <Player v-if="players.length > 0" :user="players[0]" :pickAndSetPlayer="pickAndSetPlayer1" />
     <div class="middle-container">
       <WinnerMessage v-if="winner" :winner="winner"></WinnerMessage>
       <button v-if="!arePlaying" @click="startCompetition" class="btn-compete">Compete!</button>
     </div>
-    <Player v-if="players" :user="players[1]" />
+    <Player v-if="players.length > 0" :user="players[1]" :pickAndSetPlayer="pickAndSetPlayer2" />
   </div>
 </template>
 
@@ -21,8 +21,8 @@ Vue.use(VueConfetti);
 export default {
   name: "App",
   data: () => ({
-    users: null,
-    players: null,
+    users: [],
+    players: [],
     arePlaying: false,
     winner: null,
     audios: {
@@ -40,18 +40,8 @@ export default {
     randomNumBetween,
     async setUp() {
       await this.getUsers();
-      const imageP1 = await this.getImage();
-      const imageP2 = await this.getImage();
-      this.players = [
-        {
-          ...this.pickPlayer(),
-          image: imageP1,
-        },
-        {
-          ...this.pickPlayer(),
-          image: imageP2,
-        },
-      ];
+      this.pickAndSetPlayer1();
+      this.pickAndSetPlayer2();
     },
     getUsers() {
       return fetch("https://jsonplaceholder.typicode.com/users")
@@ -63,13 +53,33 @@ export default {
         .then((response) => response.json())
         .then((json) => json[0].url);
     },
-    pickPlayer() {
+    async pickAndSetPlayer1() {
+      const player1 = await this.pickPlayer();
+      this.setPlayer1(player1);
+    },
+    async pickAndSetPlayer2() {
+      const player2 = await this.pickPlayer();
+      this.setPlayer2(player2);
+    },
+    async pickPlayer() {
+      const image = await this.getImage();
       const randomIndex = this.randomNumBetween(0, this.users.length - 1);
       return {
         name: this.users[randomIndex].name,
         HP: this.randomNumBetween(-200, -40),
         DPS: this.randomNumBetween(5, 25),
+        image,
       };
+    },
+    setPlayer1(player1) {
+      const newPlayers = [...this.players];
+      newPlayers[0] = player1;
+      this.players = newPlayers;
+    },
+    setPlayer2(player2) {
+      const newPlayers = [...this.players];
+      newPlayers[1] = player2;
+      this.players = newPlayers;
     },
     startCompetition() {
       this.arePlaying = true;
