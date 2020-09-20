@@ -1,0 +1,13 @@
+$font-color: white;
+
+button{
+  padding: 15px;
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  transition: transform 0.2s;
+  &:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+}

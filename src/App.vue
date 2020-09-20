@@ -120,7 +120,7 @@ export default {
 
 <style lang="scss">
 @import "~normalize.css";
-@import "./scss/_variables.scss";
+@import "./scss/globalStyles.scss";
 #app {
   display: flex;
   justify-content: space-around;
@@ -133,17 +133,9 @@ export default {
 }
 .btn-compete {
   font-size: 2rem;
-  padding: 15px;
-  border: 0px;
-  border-radius: 50px;
   -webkit-box-shadow: 10px 10px 5px -5px rgba(135, 128, 135, 1);
   -moz-box-shadow: 10px 10px 5px -5px rgba(135, 128, 135, 1);
   box-shadow: 10px 10px 5px -5px rgba(135, 128, 135, 1);
-  transition: transform 0.2s;
-  &:hover {
-    transform: scale(1.2);
-    cursor: pointer;
-  }
 }
 .middle-container {
   display: flex;

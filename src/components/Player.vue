@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../scss/_variables.scss";
+@import "../scss/globalStyles.scss";
 input {
   outline: none;
   border: 0px;
@@ -55,6 +55,9 @@ input {
       font-weight: 900;
       background-color: rgba(0, 0, 0, 0);
     }
+  }
+  .btn {
+    background-color: rgba(151, 255, 238, 0.75);
   }
 }
 </style>
