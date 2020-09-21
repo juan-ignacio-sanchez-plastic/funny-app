@@ -75,7 +75,7 @@ export default {
       const randomIndex = this.randomNumBetween(0, this.users.length - 1);
       return {
         name: this.users[randomIndex].name,
-        HP: this.randomNumBetween(-200, -40),
+        HP: this.randomNumBetween(-200, -100),
         DPS: this.randomNumBetween(5, 25),
         image,
       };
