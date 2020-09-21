@@ -38,7 +38,7 @@ input {
   padding: 15px 0;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50px;
-  height: 60vh;
+  height: 100%;
   .name {
     font-size: 2rem;
   }
@@ -54,6 +54,9 @@ input {
       width: 80px;
       font-weight: 900;
       background-color: rgba(0, 0, 0, 0);
+    }
+    p {
+      margin: 0;
     }
   }
   .btn {

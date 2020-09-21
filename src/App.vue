@@ -1,12 +1,16 @@
 <template>
   <div id="app">
-    <Player v-if="players.length === 2" :user="players[0]" :pickAndSetPlayer="pickAndSetPlayer1" />
+    <div class="player-container">
+      <Player v-if="players.length === 2" :user="players[0]" :pickAndSetPlayer="pickAndSetPlayer1" />
+    </div>
     <div class="middle-container">
       <WinnerMessage v-if="winner" :winner="winner"></WinnerMessage>
       <button v-if="!arePlaying && !winner" @click="startCompetition" class="btn-principal">Compete!</button>
       <button v-if="winner" @click="playAgain" class="btn-principal">Play again!</button>
     </div>
-    <Player v-if="players.length === 2" :user="players[1]" :pickAndSetPlayer="pickAndSetPlayer2" />
+    <div class="player-container">
+      <Player v-if="players.length === 2" :user="players[1]" :pickAndSetPlayer="pickAndSetPlayer2" />
+    </div>
     <audio class="audioGameMusic">
       <source src="./assets/audios/GameMusic.mp4" type="audio/mpeg" />Your browser does not support the audio element.
     </audio>
@@ -164,6 +168,10 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 20%;
+}
+.player-container {
+  height: 60vh;
 }
 
 @keyframes BgGradient {
