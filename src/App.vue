@@ -3,8 +3,8 @@
     <Player v-if="players.length === 2" :user="players[0]" :pickAndSetPlayer="pickAndSetPlayer1" />
     <div class="middle-container">
       <WinnerMessage v-if="winner" :winner="winner"></WinnerMessage>
-      <button v-if="!arePlaying && !winner" @click="startCompetition" class="btn-compete">Compete!</button>
-      <button v-if="winner" @click="playAgain" class="btn-compete">Play again!</button>
+      <button v-if="!arePlaying && !winner" @click="startCompetition" class="btn-principal">Compete!</button>
+      <button v-if="winner" @click="playAgain" class="btn-principal">Play again!</button>
     </div>
     <Player v-if="players.length === 2" :user="players[1]" :pickAndSetPlayer="pickAndSetPlayer2" />
     <audio class="audioGameMusic">
@@ -151,15 +151,30 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   color: $font-color;
 }
-.btn-compete {
+.btn-principal {
   font-size: 2rem;
   -webkit-box-shadow: 10px 10px 5px -5px rgba(135, 128, 135, 1);
   -moz-box-shadow: 10px 10px 5px -5px rgba(135, 128, 135, 1);
   box-shadow: 10px 10px 5px -5px rgba(135, 128, 135, 1);
+  background: linear-gradient(150deg, #fdf9a6, #ff6c6c, #16ff22);
+  background-size: 400% 400%;
+  animation: BgGradient 10s ease infinite;
 }
 .middle-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+@keyframes BgGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 </style>
