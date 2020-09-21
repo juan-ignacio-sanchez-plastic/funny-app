@@ -43,9 +43,9 @@ input {
     font-size: 2rem;
   }
   img {
-    max-width: 50%;
-    max-height: 150px;
-    border-radius: 400px;
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 100px;
   }
   .container-points {
     display: flex;
