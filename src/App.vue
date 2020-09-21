@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <Player v-if="players.length > 0" :user="players[0]" :pickAndSetPlayer="pickAndSetPlayer1" />
+    <Player v-if="players.length === 2" :user="players[0]" :pickAndSetPlayer="pickAndSetPlayer1" />
     <div class="middle-container">
       <WinnerMessage v-if="winner" :winner="winner"></WinnerMessage>
       <button v-if="!arePlaying" @click="startCompetition" class="btn-compete">Compete!</button>
     </div>
-    <Player v-if="players.length > 0" :user="players[1]" :pickAndSetPlayer="pickAndSetPlayer2" />
+    <Player v-if="players.length === 2" :user="players[1]" :pickAndSetPlayer="pickAndSetPlayer2" />
   </div>
 </template>
 
