@@ -3,7 +3,8 @@
     <Player v-if="players.length === 2" :user="players[0]" :pickAndSetPlayer="pickAndSetPlayer1" />
     <div class="middle-container">
       <WinnerMessage v-if="winner" :winner="winner"></WinnerMessage>
-      <button v-if="!arePlaying" @click="startCompetition" class="btn-compete">Compete!</button>
+      <button v-if="!arePlaying && !winner" @click="startCompetition" class="btn-compete">Compete!</button>
+      <button v-if="winner" @click="playAgain" class="btn-compete">Play again!</button>
     </div>
     <Player v-if="players.length === 2" :user="players[1]" :pickAndSetPlayer="pickAndSetPlayer2" />
     <audio class="audioGameMusic">
@@ -21,9 +22,7 @@ import WinnerMessage from "./components/WinnerMessage";
 import { randomNumBetween } from "./helperFunctions.js";
 import Vue from "vue";
 import VueConfetti from "vue-confetti";
-
 Vue.use(VueConfetti);
-
 export default {
   name: "App",
   data: () => ({
@@ -51,6 +50,8 @@ export default {
       this.pickAndSetPlayer2();
       this.audios.laugh = document.querySelector(".audioLaugh");
       this.audios.gameMusic = document.querySelector(".audioGameMusic");
+      this.audios.gameMusic.volume = 1;
+      this.audios.laugh.currentTime = 0;
     },
     getUsers() {
       return fetch("https://jsonplaceholder.typicode.com/users")
@@ -126,6 +127,12 @@ export default {
         this.audios[audioName].volume -= 0.05;
         if (this.audios[audioName].volume <= 0.2) clearInterval(audioReducer);
       }, 100);
+    },
+    playAgain() {
+      this.audios.laugh.pause();
+      this.winner = false;
+      this.$confetti.stop();
+      this.setUp();
     },
   },
 };
