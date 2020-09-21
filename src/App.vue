@@ -6,6 +6,12 @@
       <button v-if="!arePlaying" @click="startCompetition" class="btn-compete">Compete!</button>
     </div>
     <Player v-if="players.length === 2" :user="players[1]" :pickAndSetPlayer="pickAndSetPlayer2" />
+    <audio class="audioGameMusic">
+      <source src="./assets/audios/GameMusic.mp4" type="audio/mpeg" />Your browser does not support the audio element.
+    </audio>
+    <audio class="audioLaugh">
+      <source src="./assets/audios/Laugh.mp3" type="audio/mpeg" />Your browser does not support the audio element.
+    </audio>
   </div>
 </template>
 
@@ -26,7 +32,8 @@ export default {
     arePlaying: false,
     winner: null,
     audios: {
-      laugh: require("./assets/audios/Laugh.mp3"),
+      laugh: null,
+      gameMusic: null,
     },
   }),
   components: {
@@ -42,6 +49,8 @@ export default {
       await this.getUsers();
       this.pickAndSetPlayer1();
       this.pickAndSetPlayer2();
+      this.audios.laugh = document.querySelector(".audioLaugh");
+      this.audios.gameMusic = document.querySelector(".audioGameMusic");
     },
     getUsers() {
       return fetch("https://jsonplaceholder.typicode.com/users")
@@ -82,6 +91,7 @@ export default {
       this.players = newPlayers;
     },
     startCompetition() {
+      this.audios.gameMusic.play();
       this.arePlaying = true;
       const playing = setInterval(() => {
         this.players[0].HP += this.players[1].DPS;
@@ -94,7 +104,8 @@ export default {
       }, 1000);
     },
     setWinner() {
-      this.playLaugh();
+      this.reduceVolumeForAudio("gameMusic");
+      this.audios.laugh.play();
       if (this.players[0].HP > 0 && this.players[1].HP > 0) {
         this.winner = "TIE";
       } else if (this.players[0].HP > 0) {
@@ -110,9 +121,11 @@ export default {
         particlesPerFrame: 0.75,
       });
     },
-    playLaugh() {
-      const laughAudio = new Audio(this.audios.laugh);
-      laughAudio.play();
+    reduceVolumeForAudio(audioName) {
+      const audioReducer = setInterval(() => {
+        this.audios[audioName].volume -= 0.05;
+        if (this.audios[audioName].volume <= 0.2) clearInterval(audioReducer);
+      }, 100);
     },
   },
 };
